@@ -1,0 +1,38 @@
+<script type="text/javascript">
+
+    RED.nodes.registerType('uuid', {
+        category: 'volkszaehler-function',
+        color: '#3FADB5',
+        defaults: {
+            name: {
+                value: ""
+            },
+            middleware: {
+                value: '',
+                type: 'middleware',
+                required: true
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "volkszaehler.png",
+        label: function() {
+            return this.name || 'uuid';
+        },
+        labelStyle: function() {
+            return this.name ? "node_label_italic" : "";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="uuid">
+    <div class="form-row">
+        <label for="node-input-middleware"><i class="icon-bookmark"></i> Middleware</label>
+        <input type="text" id="node-input-middleware" placeholder="Middleware">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="uuid">
+    <p>Get UUID by channel name.</p>
+    <p>When passing `msg.topic` as channel name, `msg.uuid` is added if a publicly accessible channel of that name exists.</p>
+</script>
