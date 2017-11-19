@@ -5,7 +5,6 @@
     "repository": "https://github.com/andig/node-red-contrib-volkszaehler",
     "description": "Nodes for volkszaehler.org",
     "keywords": [
-        "node-red",
         "volkszaehler",
         "volkszähler"
     ],
