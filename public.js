@@ -1,16 +1,15 @@
 module.exports = function(RED) {
     var request = require('request');
-    var crypto = require('crypto');
 
     function PublicEntitiesNode(config) {
         RED.nodes.createNode(this, config);
 
-        this.middleware = RED.nodes.getNode(config.middleware).uri;
-        this.hash = 'vz_' + crypto.createHash('md5').update(this.middleware).digest("hex");
+        this.middleware = RED.nodes.getNode(config.middleware) || {};
 
         this.on('input', function(msg) {
-            if (this.middleware) {
-                var uri = this.middleware + 'entity.json';
+            if (this.middleware.uri) {
+                var uri = this.middleware.uri + 'entity.json';
+                
                 request(uri, function(error, response, body) {
                     if (error || response.statusCode !== 200) {
                         this.send({
@@ -26,8 +25,8 @@ module.exports = function(RED) {
                     var json = JSON.parse(body);
                     this.parseEntities(json.entities);
 
-                    var context = this.context().global;
-                    context.set(this.hash, this.map);
+                    // store in middleware
+                    this.middleware.publicEntities = this.map;
 
                     this.send({
                         payload: this.map
@@ -61,7 +60,10 @@ module.exports = function(RED) {
         this.updateMap = function(identifier, entity) {
             console.log(entity.uuid +" "+ identifier);
             if (this.map[identifier] !== undefined) {
-                this.warn("Identifier `"+identifier+"` already defined, skipping.");
+                if (this.map[identifier].uuid !== entity.uuid) {
+                    // duplicate entity name?
+                    this.warn("Identifier `"+identifier+"` already defined, skipping.");
+                }
             }
             else {
                 this.map[identifier] = entity;
