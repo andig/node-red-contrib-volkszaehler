@@ -1,0 +1,60 @@
+<script type="text/javascript">
+
+    RED.nodes.registerType('uri', {
+        category: 'volkszaehler-function',
+        color: '#3FADB5',
+        defaults: {
+            name: {
+                value: ""
+            },
+            middleware: {
+                value: '',
+                type: 'middleware',
+                required: true
+            },
+            context: {
+                value: '',
+            },
+            format: {
+                value: '',
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "volkszaehler.png",
+        label: function() {
+            return this.name || this.context +"."+ this.format;
+        },
+        labelStyle: function() {
+            return this.name ? "node_label_italic" : "";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="uri">
+    <div class="form-row">
+        <label for="node-input-middleware"><i class="icon-tag"></i> Middleware</label>
+        <input type="text" id="node-input-middleware">
+    </div>
+    <div class="form-row">
+        <label for="node-input-context"><i class="icon-tag"></i> Context</label>
+        <select id="node-input-context">
+            <option value="data" default>data</option>
+            <option value="entity">entity</option>
+            <option value="capabilities">capabilities</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-format"><i class="icon-tag"></i> Format</label>
+        <select id="node-input-format">
+            <option value="json" default>JSON</option>
+            <option value="csv">CSV</option>
+            <option value="txt">TXT</option>
+        </select>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="uri">
+    <p>Get context uri</p>
+    <p>Sets `msg.uri` to context usri for selected `context` and `format`. If `msg.uuid` is set, the uuid is appended to uri.</p>
+</script>

@@ -1,6 +1,6 @@
 {
     "name": "node-red-contrib-volkszaehler",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "license": "MIT",
     "repository": "https://github.com/andig/node-red-contrib-volkszaehler",
     "description": "Nodes for volkszaehler.org",
@@ -10,9 +10,10 @@
     ],
     "node-red": {
         "nodes": {
-            "volkszaehler-middleware": "middleware.js",
-            "volkszaehler-public": "public.js",
-            "volkszaehler-uuid": "uuid.js"
+            "volkszaehler-middleware": "src/middleware.js",
+            "volkszaehler-public": "src/public.js",
+            "volkszaehler-uuid": "src/uuid.js",
+            "volkszaehler-uri": "src/uri.js"
         }
     },
     "scripts": {
