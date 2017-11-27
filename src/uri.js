@@ -1,4 +1,5 @@
 module.exports = function(RED) {
+    var url = require('url');
 
     function ContextUriNode(config) {
         RED.nodes.createNode(this, config);
@@ -9,13 +10,20 @@ module.exports = function(RED) {
         this.on('input', function(msg) {
             if (this.middleware.uri) {
                 var uri = this.middleware.uri;
-                uri += this.config.context;
 
-                if (msg.uuid) {
-                    uri += '/' + msg.uuid;
+                if (this.config.context == 'push') {
+                    var parsed = url.parse(uri);
+                    uri = parsed.protocol + '//' + parsed.hostname + ':5582';
                 }
+                else {
+                    uri += this.config.context;
 
-                uri += '.' + this.config.format;
+                    if (msg.uuid) {
+                        uri += '/' + msg.uuid;
+                    }
+
+                    uri += '.' + this.config.format;
+                }
 
                 // if (this.config.format == 'json') {
                 //     msg.headers = {

@@ -13,10 +13,10 @@
                 required: true
             },
             context: {
-                value: '',
+                value: 'data',
             },
             format: {
-                value: '',
+                value: 'json',
             }
         },
         inputs: 1,
@@ -42,14 +42,15 @@
             <option value="data" default>data</option>
             <option value="entity">entity</option>
             <option value="capabilities">capabilities</option>
+            <option value="push">push</option>
         </select>
     </div>
     <div class="form-row">
         <label for="node-input-format"><i class="icon-tag"></i> Format</label>
         <select id="node-input-format">
-            <option value="json" default>JSON</option>
-            <option value="csv">CSV</option>
-            <option value="txt">TXT</option>
+            <option value="json" default>json</option>
+            <option value="csv">csv</option>
+            <option value="txt">txt</option>
         </select>
     </div>
 </script>
