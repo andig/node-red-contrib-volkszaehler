@@ -9,7 +9,7 @@ module.exports = function(RED) {
         this.on('input', function(msg) {
             if (this.middleware.uri) {
                 var uri = this.middleware.uri + 'entity.json';
-                
+
                 request(uri, function(error, response, body) {
                     if (error || response.statusCode !== 200) {
                         this.send({

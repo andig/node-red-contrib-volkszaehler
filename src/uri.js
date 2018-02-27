@@ -25,13 +25,20 @@ module.exports = function(RED) {
                     uri += '.' + this.config.format;
                 }
 
-                // if (this.config.format == 'json') {
-                //     msg.headers = {
-                //         "Content-type" : "application/json"
-                //     };                    
-                // }
+                if (this.config.format == 'json') {
+                    msg.headers = Object.assign(msg.headers || {}, {
+                        "Content-type" : "application/json"
+                    });
+                }
 
-                msg.uri = uri;
+                if (this.middleware.token) {
+                    msg.headers = Object.assign(msg.headers || {}, {
+                        "Authentication" : "Bearer " + this.middleware.token
+                    });
+                }
+
+                // for compatibility with HTTP request node
+                msg.url = uri;
             }
 
             this.send(msg);
