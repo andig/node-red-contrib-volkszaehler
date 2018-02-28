@@ -33,7 +33,7 @@ module.exports = function(RED) {
 
                 if (this.middleware.token) {
                     msg.headers = Object.assign(msg.headers || {}, {
-                        "Authentication" : "Bearer " + this.middleware.token
+                        "Authorization" : "Bearer " + this.middleware.token
                     });
                 }
 
