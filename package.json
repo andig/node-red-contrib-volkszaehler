@@ -1,6 +1,6 @@
 {
     "name": "node-red-contrib-volkszaehler",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "license": "MIT",
     "repository": "https://github.com/andig/node-red-contrib-volkszaehler",
     "description": "Nodes for volkszaehler.org",
@@ -20,12 +20,12 @@
         "test": "jasmine test/*.js"
     },
     "dependencies": {
-        "request": "^2.83.0",
-        "jsonwebtoken": "^8.1.1"
+        "jsonwebtoken": "^8.3.0",
+        "request": "^2.88.0"
     },
     "devDependencies": {
-        "clone": "^2.1.1",
-        "jasmine": "^2.8.0",
+        "clone": "^2.1.2",
+        "jasmine": "^2.99.0",
         "node-red-contrib-mock-node": "^0.3.0"
     }
 }
