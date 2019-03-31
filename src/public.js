@@ -12,11 +12,16 @@ module.exports = function(RED) {
 
                 request(uri, function(error, response, body) {
                     if (error || response.statusCode !== 200) {
-                        this.send({
-                            payload: error,
-                            statusCode: response.statusCode,
-                            response: response
-                        });
+                        var msg = {
+                          payload: error,
+                        };
+                        if (response) {
+                            msg = Object.assign(msg, {
+                                statusCode: response.statusCode,
+                                response: response
+                            });
+                        }
+                        this.send(msg);
                         return;
                     }
 
