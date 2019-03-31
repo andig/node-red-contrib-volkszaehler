@@ -13,13 +13,12 @@ module.exports = function(RED) {
                 var entity = map[msg.topic];
                 if (entity !== undefined) {
                     msg.uuid = entity.uuid;
-                }
-                else {
-                    this.warn('No uuid for `'+msg.topic+'`');
+                    this.send([msg, null]);
+                    return;
                 }
             }
 
-            this.send(msg);
+            this.send([null, msg]);
         });
     }
 
